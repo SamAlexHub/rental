@@ -1,0 +1,22 @@
+<mat-nav-list>
+    <ng-container *ngFor="let menu of menus">
+        <mat-list-item class="parent-item" *ngIf="menu.children && menu.children.length" (click)="handleClick(menu)"
+            [ngClass]="getActiveClass(menu)">
+            <i [class]="menu.icon" matListIcon></i>
+            <h3 @fadeInOut *ngIf="collapsed" matLine>{{menu?.label}}</h3>
+            <i class="menu-collapse-icon fal" *ngIf="menu.children && collapsed"
+                [ngClass]="!menu.expanded ? 'fa-angle-right' : 'fa-angle-down'"></i>
+        </mat-list-item>
+
+        <mat-list-item *ngIf="!menu.children || (menu.children.length === 0)"
+            [routerLink]="menu.link !== '' ? [menu.link] : null" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}" (click)="handleLinkClick(menu)">
+            <i [class]="menu.icon" matListIcon></i>
+            <h3 @fadeInOut *ngIf="collapsed" matLine>{{menu?.label}}</h3>
+        </mat-list-item>
+        <ng-container *ngIf="collapsed && menu.children && menu.children.length">
+            <sublevel-menu [data]="menu" [collapsed]="collapsed" [multiple]="multiple" [expanded]="menu.expanded">
+            </sublevel-menu>
+        </ng-container>
+    </ng-container>
+</mat-nav-list>

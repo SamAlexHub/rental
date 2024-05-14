@@ -1,0 +1,12 @@
+<mat-drawer-container class="drawer-container" fullscreen>
+    <mat-drawer #sidenav class="mat-elevation-z1 drawer" [mode]="isScreenSmall() ? 'over' : 'side'"
+        [opened]="!isScreenSmall()">
+        <sidenav [menus]="menus" [collapsed]="collapsed" [multiple]="multiple"></sidenav>
+    </mat-drawer>
+    <mat-drawer-content class="drawer-content">
+        <app-header (toggled)="sidenav.toggle()"></app-header>
+        <main class="main">
+            <router-outlet></router-outlet>
+        </main>
+    </mat-drawer-content>
+</mat-drawer-container>

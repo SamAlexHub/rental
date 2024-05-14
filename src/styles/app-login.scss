@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+@mixin app-login-theme($theme) {
+	$theme-colors: mat.get-color-config($theme);
+	$backgrounds: map.get($theme-colors, background);
+	$isDark: map.get($theme, is-dark);
+
+	app-login {
+		background-color: mat.get-color-from-palette($backgrounds, card);
+		@if (isDark) {
+			color: white;
+			.link-actions {
+				a {
+					color: white;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+:host {
+	::ng-deep {
+		.mat-nav-list {
+			&.mat-list-base {
+				padding-left: 0.6rem;
+				padding-right: 0.6rem;
+
+				.mat-list-item {
+					height: 50px;
+					border-radius: 0.5rem;
+					overflow: hidden;
+
+					// &.active {
+					//     background-color: rgba(63, 81, 181, 0.18);
+					//     color: #3f51b5;
+					// }
+
+					// &.parent-item {
+					//     &.active {
+					//         background-color: rgba(63, 81, 181, 0.18);
+					//         color: #3f51b5;
+					//     }
+					// }
+				}
+
+				// .mat-list-item {
+				//     &.sublevel-item-link {
+				//         &.active {
+				//             background-color: rgba(63, 81, 181, 0.5);
+				//             color: #3f51b5;
+				//         }
+				//     }
+				// }
+			}
+
+			> .mat-list-item {
+				margin-bottom: 0.4rem;
+			}
+		}
+	}
+}

@@ -1,0 +1,52 @@
+@for $size from 3 through 15 {
+	.size-#{$size*5} {
+		width: #{$size * 5}px;
+		height: #{$size * 5}px;
+	}
+}
+@for $size from 0 through 10 {
+	.p-#{$size} {
+		padding: #{$size * 0.5}rem !important;
+	}
+	.pt-#{$size} {
+		padding-top: #{$size * 0.5}rem !important;
+	}
+	.ps-#{$size} {
+		padding-left: #{$size * 0.5}rem !important;
+	}
+	.pe-#{$size} {
+		padding-right: #{$size * 0.5}rem !important;
+	}
+	.pb-#{$size} {
+		padding-bottom: #{$size * 0.5}rem !important;
+	}
+
+	.m-#{$size} {
+		margin: #{$size * 0.5}rem !important;
+	}
+	.mt-#{$size} {
+		margin-top: #{$size * 0.5}rem !important;
+	}
+	.ms-#{$size} {
+		margin-left: #{$size * 0.5}rem !important;
+	}
+	.me-#{$size} {
+		margin-right: #{$size * 0.5}rem !important;
+	}
+	.mb-#{$size} {
+		margin-bottom: #{$size * 0.5}rem !important;
+	}
+
+	.gap-#{$size} {
+		gap: #{$size * 0.5}rem;
+	}
+
+	.rounded {
+		&-circle {
+			border-radius: 50% !important;
+		}
+		&-#{$size} {
+			border-radius: #{$size * 0.2}rem !important;
+		}
+	}
+}

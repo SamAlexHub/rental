@@ -1,0 +1,37 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use 'src/themes/common.scss';
+
+@use 'node_modules/@angular/material/core/focus-indicators/focus-indicators';
+@use 'node_modules/@angular/cdk/a11y';
+@use 'node_modules/@angular/cdk/overlay';
+@use 'node_modules/@angular/cdk/text-field';
+
+@use '~scss/base' as base;
+@use '~scss/tables' as tables;
+@use '~scss/functions' as functions;
+
+@import '~assets/font-awesome/css/all.css';
+
+// Plus imports for other components in your app.
+
+@include mat.ripple();
+@include a11y.a11y-visually-hidden();
+@include overlay.overlay();
+@include text-field.text-field();
+@include text-field.text-field-autosize();
+@include text-field.text-field-autofill();
+
+@include focus-indicators.private-strong-focus-indicators-positioning();
+@include mat.typography-hierarchy(common.$app-typography, 'body');
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}

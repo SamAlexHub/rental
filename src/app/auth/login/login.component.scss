@@ -1,0 +1,59 @@
+:host {
+	position: relative;
+
+	svg {
+		&.svg-bg {
+			position: fixed;
+			height: 100%;
+			bottom: 0;
+			top: 0;
+			left: 0;
+			z-index: -1;
+
+			@media (max-width: 767px) {
+				display: none;
+			}
+		}
+	}
+
+	mat-form-field {
+		margin-bottom: 0.5rem;
+	}
+
+	.login {
+		&-layout {
+			height: 100%;
+		}
+
+		svg {
+			width: 100%;
+		}
+
+		&-graphic-section {
+			height: 100%;
+			padding: 1rem;
+		}
+
+		&-form-section {
+			padding: 1rem;
+
+			@media (max-width: 567px) {
+				width: 100%;
+			}
+		}
+
+		.submit-actions {
+			display: grid;
+		}
+
+		.link-actions {
+			padding: 0 0 1rem;
+			display: flex;
+			justify-content: flex-end;
+
+			.link {
+				text-decoration: none;
+			}
+		}
+	}
+}

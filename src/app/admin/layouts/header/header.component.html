@@ -1,0 +1,37 @@
+<mat-toolbar color="primary" class="header mat-elevation-z2">
+    <button (click)="onToggleCollapse()" mat-icon-button>
+        <mat-icon aria-label="label">menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <div class="header-actions gap-1">
+
+        <div class="theme-mode size-20 rounded-circle" matRipple>
+            <input type="checkbox" id="themeMode" [ngModel]="isThemeMode" (ngModelChange)="onChangeThemeMode($event)">
+            <div class="theme-mode-icon">
+                <label for="themeMode" class="fa-regular"
+                    [ngClass]="{'fa-brightness': isThemeMode,'fa-moon': !isThemeMode }"></label>
+            </div>
+        </div>
+
+        <span class="profile size-35 rounded-2" matRipple>
+            <img class="size-35 img-profile" src="/assets/images/default.jpg" [matMenuTriggerFor]="menu" alt="default">
+        </span>
+    </div>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+    <h5 class="menu-title display-4 m-0 mb-1">John Deo</h5>
+    <button mat-menu-item>
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+    </button>
+
+    <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Settings</span>
+    </button>
+
+    <button (click)="onLogout()" mat-menu-item>
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+    </button>
+</mat-menu>

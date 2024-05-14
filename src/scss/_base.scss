@@ -1,0 +1,103 @@
+.table-layout {
+	border-radius: 0.3rem;
+	overflow: hidden;
+
+	&-header {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	table {
+		width: 100%;
+
+		th,
+		td {
+			&[align='center'] {
+				text-align: center;
+			}
+		}
+	}
+}
+
+mat-form-field {
+	width: 100%;
+	&.pb-0,
+	&.mb-0 {
+		.mat-form-field-wrapper {
+			padding-bottom: 0 !important;
+			margin-bottom: 0 !important;
+		}
+	}
+}
+
+.page-header {
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.heading {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+	}
+
+	&-actions {
+		display: flex;
+
+		&.start {
+			justify-content: flex-start;
+		}
+
+		&.center {
+			justify-content: center;
+		}
+
+		&.end {
+			justify-content: flex-end;
+		}
+	}
+}
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+img {
+	&[class*='size-'] {
+		object-fit: cover;
+	}
+}
+
+.menu {
+	&-title {
+		padding: 0 1rem;
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 600px) {
+	// Making the modal fullscreen in mobiles
+	.cdk-overlay-pane {
+		max-width: 95vw !important;
+	}
+}
+
+.theme-mode {
+	padding: 0.5rem;
+	transition: all 0.2s ease;
+	input[type='checkbox'] {
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+	}
+	&-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		label {
+			cursor: pointer;
+		}
+	}
+}

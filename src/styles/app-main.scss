@@ -1,0 +1,39 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+@mixin app-main-theme($theme) {
+	$theme-colors: mat.get-color-config($theme);
+
+	$primary-color-palette: map.get($theme-colors, primary);
+
+	app-main {
+		sidenav {
+			.mat-nav-list {
+				&.mat-list-base {
+					.mat-list-item {
+						&.active {
+							background-color: mat.get-color-from-palette($primary-color-palette, 100);
+							color: mat.get-color-from-palette($primary-color-palette, 900);
+						}
+
+						&.parent-item {
+							&.active {
+								background-color: mat.get-color-from-palette($primary-color-palette, 100);
+								color: mat.get-color-from-palette($primary-color-palette, 900);
+							}
+						}
+
+						.mat-list-item {
+							&.sublevel-item-link {
+								&.active {
+									background-color: mat.get-color-from-palette($primary-color-palette, 100);
+									color: mat.get-color-from-palette($primary-color-palette, 900);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
