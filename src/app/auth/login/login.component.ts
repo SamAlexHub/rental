@@ -19,10 +19,21 @@ export class LoginComponent implements OnInit {
 	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) { }
 
 	ngOnInit(): void {
+		this.checkToken();
 		this.form = this.fb.group({
 			email: new FormControl('', [Validators.required, Validators.email]),
 			password: new FormControl('', [Validators.required]),
 		});
+	}
+
+	checkToken() {
+		let token = localStorage.getItem('token');
+		if (token) {
+			this.router.navigate(['admin/dashboard']);
+		} else {
+			this.router.navigate(['']);
+
+		}
 	}
 
 	onSubmitForm(): void {
