@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	endpoint: 'https://mayoora-webapp-api.herokuapp.com/v1',
+	endpoint: 'https://mayoora-webserver.onrender.com',
 };
