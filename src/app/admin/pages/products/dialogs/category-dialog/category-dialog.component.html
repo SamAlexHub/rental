@@ -9,15 +9,6 @@
                 Category name is required.
             </mat-error>
         </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Created By</mat-label>
-            <input matInput placeholder="Created By" formControlName="createdBy">
-
-            <mat-error *ngIf="form.controls['createdBy'].hasError('required')">
-                Created By is required.
-            </mat-error>
-        </mat-form-field>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">

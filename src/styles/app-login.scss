@@ -9,7 +9,7 @@
 	app-login {
 		background-color: mat.get-color-from-palette($backgrounds, card);
 		@if (isDark) {
-			color: white;
+			// color: white;
 			.link-actions {
 				a {
 					color: white;

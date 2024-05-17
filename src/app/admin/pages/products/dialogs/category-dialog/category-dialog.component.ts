@@ -16,28 +16,25 @@ export class CategoryDialogComponent implements OnInit {
 	form!: FormGroup;
 	mode: 'create' | 'edit' = 'create';
 	emitEvents: any = { data: null, event: 'cancel' };
+	cId: String = '';
 
-	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<CategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<CategoryDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
 	ngOnInit(): void {
 		this.mode = this.data.mode;
 		this.form = this.fb.group({
 			name: new FormControl('', [Validators.required]),
-			createdBy: new FormControl('', [Validators.required]),
-			catID: new FormControl(),
 		});
-
+		this.cId = this.data.values._id;
 		if (this.mode === 'edit') {
 			this.form.patchValue({
 				name: this.data.values.name,
-				createdBy: this.data.values.createdBy,
-				catID: this.data.values.catID,
 			});
 		}
 	}
 
 	onSubmitForm(): void {
 		if (this.form.invalid) return;
-		this.dialogRef.close(Object.assign({}, this.emitEvents, { data: this.form.value, event: 'confirm', mode: this.mode }));
+		this.dialogRef.close(Object.assign({}, this.emitEvents, { data: this.form.value, event: 'confirm', mode: this.mode,id:this.cId}));
 	}
 }

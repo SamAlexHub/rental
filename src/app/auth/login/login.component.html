@@ -85,7 +85,6 @@
         </div>
 
         <div class="login-form-section" fxFlex.lt-lg="40" fxFlex.gt-md="35">
-            <h1>Login to your account</h1>
             <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
@@ -94,6 +93,7 @@
                         *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
                         Please enter a valid email address
                     </mat-error>
+                   
                     <mat-error *ngIf="form.controls['email'].hasError('required')">
                         Email is required.
                     </mat-error>
@@ -106,7 +106,7 @@
                         Password is required.
                     </mat-error>
                 </mat-form-field>
-
+                <span *ngIf="error" style="color: red;">{{error}}</span>
                 <div class="link-actions">
                     <a class="link" routerLink="/auth/forgot-password">Forgot Password</a>
                 </div>

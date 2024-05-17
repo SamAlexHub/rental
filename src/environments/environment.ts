@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	endpoint: 'https://mayoora-webapp-api.herokuapp.com/v1',
+	endpoint: 'https://mayoora-webserver.onrender.com',
 };
 
 /*

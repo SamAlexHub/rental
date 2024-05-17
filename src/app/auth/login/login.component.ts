@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UserResponse } from 'src/app/core/models/user';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Role } from 'src/app/core/models/role';
 
 @Component({
@@ -14,8 +14,9 @@ import { Role } from 'src/app/core/models/role';
 })
 export class LoginComponent implements OnInit {
 	form!: FormGroup;
+	error: String = '';
 
-	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {}
+	constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private snackBar: MatSnackBar) { }
 
 	ngOnInit(): void {
 		this.form = this.fb.group({
@@ -25,26 +26,25 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmitForm(): void {
-		this.router.navigate(['admin/dashboard']);
-		// if (this.form.invalid) return;
-		// const body = { email: this.form.value.email.trim(), password: this.form.value.password.trim() };
-		// this.authService.login(body).subscribe({
-		// 	next: (res: UserResponse) => {
-		// 		if (res && res.data.hasOwnProperty('access_token')) {
-		// 			const role = this.authService.currentUserValue.user.role;
-		// 			setTimeout(() => {
-		// 				if (role === Role.user || role === Role.admin) {
-		// 					this.router.navigate(['/', Role.admin]);
-		// 				}
-		// 			}, 10);
-		// 		}
-		// 	},
-		// 	error: ({ error }) => {
-		// 		this.snackBar.open(error.message || 'something went wrong please try again', '', {
-		// 			duration: 3000,
-		// 		});
-		// 	},
-		// });
-		// this.form.reset();
+		if (this.form.invalid) return;
+		const body = { email: this.form.value.email.trim(), password: this.form.value.password.trim() };
+		this.authService.adminLogin(body).subscribe({
+			next: (res) => {
+				if (res && res.hasOwnProperty('token')) {
+					localStorage.setItem('token', res.token);
+					this.error = '';
+					this.snackBar.open(res.data.name, 'Logged in....', { duration: 100 })
+					this.router.navigate(['admin/dashboard']);
+				}
+				if (res.success == false) {
+					this.error = res.message;
+				}
+			},
+			error: (err) => {
+				this.snackBar.open(err.message || 'something went wrong please try again', '', {
+					duration: 300,
+				});
+			}
+		});
 	}
 }
