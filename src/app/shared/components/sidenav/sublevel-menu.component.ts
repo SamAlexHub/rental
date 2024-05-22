@@ -73,7 +73,7 @@ export class SublevelMenuComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	handleClick(item: Menu): void {
+	handleClick(item: Menu): void { 
 		if (!this.multiple) {
 			if (this.data.children && this.data.children?.length) {
 				for (let child of this.data.children) {

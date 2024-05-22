@@ -17,14 +17,14 @@ export const MenuData: Menu[] = [
 				label: 'Product Category',
 			},
 			{
-				link: 'products/product-rent',
+				link: 'products/inventory',
 				icon: '',
-				label: 'Product Rent',
+				label: 'Inventory',
 			},
 			{
-				link: 'products/stock',
+				link: 'products/bookings',
 				icon: '',
-				label: 'Stock',
+				label: 'Bookings',
 			},
 		],
 	},
