@@ -52,7 +52,7 @@ export class BookingsComponent implements OnInit {
             if (res.event === 'confirm' && res.mode === 'create') {
                 this.bookingService.createBooking(res.data).subscribe((res: any) => {
                     this.listBookings();
-                })
+                });
 
             } else if (res.event === 'confirm' && res.mode === 'edit') {
                 // this.cateServices.updateCategory(res.id, res.data).subscribe((res: any) => {
