@@ -1,7 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DatePipe } from '@angular/common';
+
+import { BookingService } from 'src/app/services/booking/booking.service';
 import { CategoryService } from 'src/app/services/category/category.service';
+import { CustomerService } from 'src/app/services/customer/customer.service';
 
 export interface DialogData {
 	values: any;
@@ -19,12 +23,20 @@ export class BookingDialogComponent implements OnInit {
 	emitEvents: any = { data: null, event: 'cancel' };
 	cId: String = '';
 	categoryList: any;
-	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<BookingDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private categoryService: CategoryService) { }
+	productList: any[] = [];
+	customerList: any[] = [];
+	selectedCategoryId: String | undefined;
+
+	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<BookingDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private categoryService: CategoryService, private bookingService: BookingService, private datePipe: DatePipe, private customerService: CustomerService) { }
 
 	ngOnInit(): void {
 		this.mode = this.data.mode;
 		this.form = this.fb.group({
-			name: new FormControl('', [Validators.required]),
+			category: new FormControl(),
+			product: new FormControl(),
+			booking_date: new FormControl(),
+			return_date: new FormControl(),
+			customer: new FormControl()
 		});
 		// this.cId = this.data.values._id;
 		// if (this.mode === 'edit') {
@@ -38,14 +50,45 @@ export class BookingDialogComponent implements OnInit {
 
 	onSubmitForm(): void {
 		if (this.form.invalid) return;
-		this.dialogRef.close(Object.assign({}, this.emitEvents, { data: this.form.value, event: 'confirm', mode: this.mode, id: this.cId }));
+		this.selectedCategoryId = this.form.value.category;
+		let form = {
+			categoryId: '',
+			productId: '',
+			booking_date: '',
+			return_date: '',
+			customerId:''
+		}
+		form.categoryId = this.form.value.category;
+		form.productId = this.form.value.product;
+		form.customerId = this.form.value.customer;
+		form.booking_date = this.datePipe.transform(this.form.value.booking_date, 'yyyy-MM-dd') ?? '';
+		form.return_date = this.datePipe.transform(this.form.value.return_date, 'yyyy-MM-dd') ?? '';
+
+		this.dialogRef.close(Object.assign({}, this.emitEvents, { data: form, event: 'confirm', mode: this.mode, id: this.cId }));
 	}
 
 	getCategoryList() {
 		this.categoryService.listCategories().subscribe((res: any) => {
-			if (res.category) {				
+			if (res.category) {
 				this.categoryList = res.category;
 			}
-		})
+		});
+		this.getCustomerList();
+	}
+	onCategoryChange(event: any) {
+		this.getProductByCategory(event.target.value);
+	}
+
+	getProductByCategory(id: String) {
+		this.bookingService.getProductByCategory(id).subscribe((res: any) => {
+			this.productList = res.product;
+		});
+	}
+
+	getCustomerList() {
+		this.customerService.listCustomers().subscribe((res: any) => {
+			console.log('cc', res);
+			if (res.data) { this.customerList = res.data }
+		});
 	}
 }

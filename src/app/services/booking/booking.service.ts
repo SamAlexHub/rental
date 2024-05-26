@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class BookingService {
 
   url = environment.endpoint + '/v1/booking';
-
+  productUrl = environment.endpoint + '/v1/product';
 
   constructor(private http: HttpClient) { }
 
@@ -19,5 +19,23 @@ export class BookingService {
       "contentType": 'application/json'
     });
     return this.http.get(url, { headers });
+  }
+
+  createBooking(data: any) {
+    const url = this.url + '/create';
+    const headers = new HttpHeaders({
+      "contentType": 'application/json'
+    });
+    return this.http.post(url,data, { headers });
+  }
+
+  getProductByCategory(id: String) {
+
+    const url = this.productUrl + '/getItembycategoryId';
+
+    const headers = new HttpHeaders({
+      "contentType": 'application/json'
+    });
+    return this.http.post(url, { id: id }, { headers });
   }
 }

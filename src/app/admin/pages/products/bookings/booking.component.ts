@@ -8,8 +8,8 @@ import { BookingDialogComponent } from "../dialogs/booking-dialog/booking-dialog
 import { BookingService } from "src/app/services/booking/booking.service";
 
 export interface PeriodicElement {
-	name: string;
-	catID: String;
+    name: string;
+    catID: String;
 }
 const ELEMENT_DATA: [] = [];
 
@@ -43,23 +43,24 @@ export class BookingsComponent implements OnInit {
 
     onOpenBookingDialog(mode: string, values?: any) {
         const dialogRef = this.dialog.open(BookingDialogComponent, {
-			width: '600px',
-			disableClose: true,
-			data: { values, mode },
-		});
+            width: '600px',
+            disableClose: true,
+            data: { values, mode },
+        });
 
-		dialogRef.afterClosed().subscribe((res) => {
-			if (res.event === 'confirm' && res.mode === 'create') {
-				// this.cateServices.createCategory(res.data).subscribe((res: any) => {
-				// 	this.listCategories();
-				// });
-			} else if (res.event === 'confirm' && res.mode === 'edit') {
-				// this.cateServices.updateCategory(res.id, res.data).subscribe((res: any) => {
-				// 	if (res.success == true) { this.listCategories(); }
-				// });
+        dialogRef.afterClosed().subscribe((res) => {
+            if (res.event === 'confirm' && res.mode === 'create') {
+                this.bookingService.createBooking(res.data).subscribe((res: any) => {
+                    this.listBookings();
+                })
 
-			}
-		});
+            } else if (res.event === 'confirm' && res.mode === 'edit') {
+                // this.cateServices.updateCategory(res.id, res.data).subscribe((res: any) => {
+                // 	if (res.success == true) { this.listCategories(); }
+                // });
+
+            }
+        });
     }
 
 }
