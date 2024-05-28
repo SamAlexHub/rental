@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from "@angular/material/table";
 import { BookingDialogComponent } from "../dialogs/booking-dialog/booking-dialog.component"
 import { BookingService } from "src/app/services/booking/booking.service";
+import { DatePipe } from "@angular/common";
 
 export interface PeriodicElement {
     name: string;
@@ -26,8 +27,9 @@ export class BookingsComponent implements OnInit {
     dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
     @ViewChild(MatPaginator) paginator!: MatPaginator;
     @ViewChild(MatSort) sort!: MatSort;
+    selectedDate: Date | undefined;
 
-    constructor(private dialog: MatDialog, private bookingService: BookingService) { }
+    constructor(private dialog: MatDialog, private bookingService: BookingService, private datePipe: DatePipe) { }
 
     ngOnInit(): void {
         this.listBookings();
@@ -35,8 +37,6 @@ export class BookingsComponent implements OnInit {
 
     listBookings() {
         this.bookingService.listProducts().subscribe((res: any) => {
-            console.log('booking', res);
-
             this.dataSource = res.data;
         });
     }
@@ -55,12 +55,17 @@ export class BookingsComponent implements OnInit {
                 });
 
             } else if (res.event === 'confirm' && res.mode === 'edit') {
-                // this.cateServices.updateCategory(res.id, res.data).subscribe((res: any) => {
-                // 	if (res.success == true) { this.listCategories(); }
-                // });
 
             }
         });
+    }
+
+    getDateWiseFilter() {
+        if (this.selectedDate) {
+            this.bookingService.getBookingByDate(this.selectedDate).subscribe((res: any) => {
+                this.dataSource = res.data;
+            })
+        }
     }
 
 }

@@ -12,11 +12,15 @@
     <div class="table-layout-header" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign.lt-md="start center">
         <mat-form-field class="mb-0 pb-0" appearance="outline" fxFlex.lt-lg="50" fxFlex.gt-md="30">
             <mat-label>Search</mat-label>
-            <input matInput placeholder="Search">
+            <input matInput [matDatepicker]="picker" placeholder="Date Search" [(ngModel)]="selectedDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <button mat-icon-button matSuffix (click)="getDateWiseFilter()">
+                <mat-icon>search</mat-icon>
+            </button>
         </mat-form-field>
-
         <div class="table-layout-actions">
-            <button  (click)="onOpenBookingDialog('create')" color="accent" mat-raised-button>
+            <button (click)="onOpenBookingDialog('create')" color="accent" mat-raised-button>
                 Create New Booking
             </button>
         </div>

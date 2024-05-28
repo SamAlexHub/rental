@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="onSubmitForm()">
+    <h2 mat-dialog-title>{{mode === 'create' ? 'Create New Product' : 'Edit Product'}}</h2>
+    <mat-dialog-content class="mat-typography">
+        <mat-form-field appearance="outline">
+            <mat-label>Select Category</mat-label>
+            <select matNativeControl formControlName="category" required>
+                <option *ngFor="let category of categoryList" [value]="category._id">{{category?.name}}</option>
+            </select>
+            <mat-error *ngIf="form.controls['category'].hasError('required')">
+                Category name is required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Product Name</mat-label>
+            <input matInput formControlName="name">
+            <mat-error *ngIf="form.controls['name'].hasError('required')">
+                Product name is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Serial No</mat-label>
+            <input matInput formControlName="serial_no">
+            <mat-error *ngIf="form.controls['serial_no'].hasError('required')">
+                Serial name is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Total Stock</mat-label>
+            <input matInput formControlName="inventory_stock">
+            <mat-error *ngIf="form.controls['inventory_stock'].hasError('required')">
+                inventory_stock is required.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Rent</mat-label>
+            <input matInput formControlName="rentperday">
+            <mat-error *ngIf="form.controls['rentperday'].hasError('required')">
+                rentperday is required.
+            </mat-error>
+        </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button type="button" color="warn" mat-button [mat-dialog-close]="emitEvents">Cancel</button>
+        <button [disabled]="!form.valid" type="submit" mat-button>
+            {{mode === 'create' ? 'Create' : 'Update'}}
+        </button>
+    </mat-dialog-actions>
+</form>

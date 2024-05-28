@@ -4,8 +4,10 @@ import { MatSort } from "@angular/material/sort";
 import { MatDialog } from '@angular/material/dialog';
 
 import { MatTableDataSource } from "@angular/material/table";
-import { BookingDialogComponent } from "../dialogs/booking-dialog/booking-dialog.component"
+
 import { InventoryService } from "src/app/services/inventory/inventory.service";
+import { InventoryDialogComponent } from "../dialogs/inventory-dialogue/inventory.dialogue";
+import { ConfirmComponent } from "src/app/shared/components/dialogs/confirm/confirm.component";
 
 export interface PeriodicElement {
   name: string;
@@ -39,8 +41,8 @@ export class ProductRentComponent implements OnInit {
     })
   }
 
-  onOpenBookingDialog(mode: string, values?: any) {
-    const dialogRef = this.dialog.open(BookingDialogComponent, {
+  onOpenInventoryDialog(mode: string, values?: any, id?: String) {
+    const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: '600px',
       disableClose: true,
       data: { values, mode },
@@ -48,13 +50,36 @@ export class ProductRentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res.event === 'confirm' && res.mode === 'create') {
-
+        this.invService.createProducts(res.data).subscribe((res) => {
+          this.listProducts();
+        })
 
       } else if (res.event === 'confirm' && res.mode === 'edit') {
 
-
+        if (id) {
+          this.invService.updateProduct(res.data, id).subscribe((res) => {
+            this.listProducts();
+          })
+        }
       }
     });
+  }
+
+  deleteProduct(element: any) {
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      disableClose: true,
+      data: { message: `Are you sure you want to delete ${element?.name} ?`, title: 'Delete Confirmation' },
+    });
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        if (element._id) {
+          this.invService.deleteProduct(element?._id).subscribe((res: any) => {
+            this.listProducts();
+          })
+        }
+      }
+    });
+
   }
 
 }

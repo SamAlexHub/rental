@@ -28,16 +28,16 @@ export const MenuData: Menu[] = [
 			},
 		],
 	},
-	{
-		link: '',
-		icon: 'fa-light fa-building-lock',
-		label: 'Administration',
-		children: [
-			{
-				link: 'administration/branches',
-				icon: '',
-				label: 'Branches',
-			},
-		],
-	},
+	// {
+	// 	link: '',
+	// 	icon: 'fa-light fa-building-lock',
+	// 	label: 'Administration',
+	// 	children: [
+	// 		{
+	// 			link: 'administration/branches',
+	// 			icon: '',
+	// 			label: 'Branches',
+	// 		},
+	// 	],
+	// },
 ];

@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 
 import { CategoryDialogComponent } from '../dialogs/category-dialog/category-dialog.component';
-import { dirxml } from 'console';
 import { ConfirmComponent } from 'src/app/shared/components/dialogs/confirm/confirm.component';
 import { CategoryService } from 'src/app/services/category/category.service';
 

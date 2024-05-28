@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -14,11 +14,12 @@ import { BookingDialogComponent } from './dialogs/booking-dialog/booking-dialog.
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { InventoryDialogComponent } from './dialogs/inventory-dialogue/inventory.dialogue';
 
 
 @NgModule({
 	providers:[DatePipe],
-	declarations: [ProductCategoryComponent, ProductRentComponent,ProductsOutletComponent, CategoryDialogComponent,BookingsComponent,BookingDialogComponent],
-	imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, ProductsRoutingModule,MatDatepickerModule,MatInputModule,MatNativeDateModule],
+	declarations: [ProductCategoryComponent, ProductRentComponent,ProductsOutletComponent, CategoryDialogComponent,BookingsComponent,BookingDialogComponent,InventoryDialogComponent],
+	imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, ProductsRoutingModule,MatDatepickerModule,MatInputModule,MatNativeDateModule,FormsModule],
 })
 export class ProductsModule {}

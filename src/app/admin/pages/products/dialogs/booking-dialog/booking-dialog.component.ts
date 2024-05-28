@@ -56,13 +56,13 @@ export class BookingDialogComponent implements OnInit {
 			productId: '',
 			booking_date: '',
 			return_date: '',
-			customerId:''
+			customerId: ''
 		}
 		form.categoryId = this.form.value.category;
 		form.productId = this.form.value.product;
 		form.customerId = this.form.value.customer;
-		form.booking_date = this.datePipe.transform(this.form.value.booking_date, 'yyyy-MM-dd') ?? '';
-		form.return_date = this.datePipe.transform(this.form.value.return_date, 'yyyy-MM-dd') ?? '';
+		form.booking_date = this.form.value.booking_date;
+		form.return_date = this.form.value.return_date;
 
 		this.dialogRef.close(Object.assign({}, this.emitEvents, { data: form, event: 'confirm', mode: this.mode, id: this.cId }));
 	}
@@ -87,7 +87,6 @@ export class BookingDialogComponent implements OnInit {
 
 	getCustomerList() {
 		this.customerService.listCustomers().subscribe((res: any) => {
-			console.log('cc', res);
 			if (res.data) { this.customerList = res.data }
 		});
 	}

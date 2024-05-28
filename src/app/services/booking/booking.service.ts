@@ -10,6 +10,7 @@ export class BookingService {
 
   url = environment.endpoint + '/v1/booking';
   productUrl = environment.endpoint + '/v1/product';
+  local = 'http://localhost:8100' + '/v1/booking'
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +27,7 @@ export class BookingService {
     const headers = new HttpHeaders({
       "contentType": 'application/json'
     });
-    return this.http.post(url,data, { headers });
+    return this.http.post(url, data, { headers });
   }
 
   getProductByCategory(id: String) {
@@ -37,5 +38,13 @@ export class BookingService {
       "contentType": 'application/json'
     });
     return this.http.post(url, { id: id }, { headers });
+  }
+
+  getBookingByDate(date: any) {
+    const url = this.url + '/date';
+    const headers = new HttpHeaders({
+      "contentType": 'application/json'
+    });
+    return this.http.post(url, { date: date }, { headers });
   }
 }
