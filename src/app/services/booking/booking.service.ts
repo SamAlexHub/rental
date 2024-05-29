@@ -30,6 +30,14 @@ export class BookingService {
     return this.http.post(url, data, { headers });
   }
 
+  updateBooking(data: any, id?: String) {
+    const url = this.url + `/update/${id}`;
+    const headers = new HttpHeaders({
+      "contentType": 'application/json'
+    });
+    return this.http.put(url, data, { headers });
+  }
+
   getProductByCategory(id: String) {
 
     const url = this.productUrl + '/getItembycategoryId';
@@ -46,5 +54,13 @@ export class BookingService {
       "contentType": 'application/json'
     });
     return this.http.post(url, { date: date }, { headers });
+  }
+
+  deleteBooking(id?: String) {
+    const url = this.url + `/delete/${id}`;
+    const headers = new HttpHeaders({
+      "contentType": 'application/json'
+    });
+    return this.http.delete(url, { headers });
   }
 }

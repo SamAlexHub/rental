@@ -7,6 +7,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { BookingDialogComponent } from "../dialogs/booking-dialog/booking-dialog.component"
 import { BookingService } from "src/app/services/booking/booking.service";
 import { DatePipe } from "@angular/common";
+import { ConfirmComponent } from "src/app/shared/components/dialogs/confirm/confirm.component";
 
 export interface PeriodicElement {
     name: string;
@@ -41,12 +42,14 @@ export class BookingsComponent implements OnInit {
         });
     }
 
-    onOpenBookingDialog(mode: string, values?: any) {
+    onOpenBookingDialog(mode: string, values?: any, id?: String) {
         const dialogRef = this.dialog.open(BookingDialogComponent, {
             width: '600px',
             disableClose: true,
             data: { values, mode },
         });
+
+
 
         dialogRef.afterClosed().subscribe((res) => {
             if (res.event === 'confirm' && res.mode === 'create') {
@@ -55,7 +58,9 @@ export class BookingsComponent implements OnInit {
                 });
 
             } else if (res.event === 'confirm' && res.mode === 'edit') {
-
+                this.bookingService.updateBooking(res.data, id).subscribe((res: any) => {
+                    this.listBookings();
+                })
             }
         });
     }
@@ -66,6 +71,23 @@ export class BookingsComponent implements OnInit {
                 this.dataSource = res.data;
             })
         }
+    }
+
+    deleteBooking(element: any) {
+        const dialogRef = this.dialog.open(ConfirmComponent, {
+            disableClose: true,
+            data: { message: `Are you sure you want to delete this booking ${element?.product?.name} ?`, title: 'Delete Confirmation' },
+        });
+        dialogRef.afterClosed().subscribe((result: boolean) => {
+            if (result) {
+                if (element._id) {
+                    this.bookingService.deleteBooking(element._id).subscribe((res: any) => {
+                        this.listBookings();
+                    });
+                }
+            }
+        });
+
     }
 
 }

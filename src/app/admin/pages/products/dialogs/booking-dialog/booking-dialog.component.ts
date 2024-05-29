@@ -38,12 +38,16 @@ export class BookingDialogComponent implements OnInit {
 			return_date: new FormControl(),
 			customer: new FormControl()
 		});
-		// this.cId = this.data.values._id;
-		// if (this.mode === 'edit') {
-		// 	this.form.patchValue({
-		// 		name: this.data.values.name,
-		// 	});
-		// }
+		if (this.mode === 'edit') {
+			if (this.data.values?.product?.category) { this.getProductByCategory(this.data.values?.product?.category) }
+			this.form.patchValue({
+				category: this.data.values?.product?.category,
+				product: this.data.values.productId,
+				booking_date: this.data.values.booking_date,
+				return_date: this.data.values.return_date,
+				customer: this.data.values.customerId
+			});
+		}
 
 		this.getCategoryList();
 	}

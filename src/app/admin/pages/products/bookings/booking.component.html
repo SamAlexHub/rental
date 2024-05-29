@@ -79,10 +79,10 @@
         <ng-container matColumnDef="Actions">
             <th mat-header-cell align="center" *matHeaderCellDef> Actions </th>
             <td mat-cell align="center" *matCellDef="let element">
-                <button color="primary" mat-icon-button>
+                <button color="primary" (click)="onOpenBookingDialog( 'edit', element,element._id)" mat-icon-button>
                     <i class="fa-regular fa-pen-to-square"></i>
                 </button>
-                <button color="warn" mat-icon-button>
+                <button color="warn" mat-icon-button (click)="deleteBooking(element)">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             </td>
