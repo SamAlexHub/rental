@@ -9,7 +9,7 @@ export const MenuData: Menu[] = [
 	{
 		link: '',
 		icon: 'fa-light fa-briefcase',
-		label: 'Products',
+		label: 'Inventory',
 		children: [
 			{
 				link: 'products/product-category',
@@ -19,25 +19,19 @@ export const MenuData: Menu[] = [
 			{
 				link: 'products/inventory',
 				icon: '',
-				label: 'Inventory',
+				label: 'Products',
 			},
 			{
 				link: 'products/bookings',
 				icon: '',
 				label: 'Bookings',
 			},
+			{
+				link: 'products/customer',
+				icon: '',
+				label: 'Customers',
+			},
 		],
 	},
-	// {
-	// 	link: '',
-	// 	icon: 'fa-light fa-building-lock',
-	// 	label: 'Administration',
-	// 	children: [
-	// 		{
-	// 			link: 'administration/branches',
-	// 			icon: '',
-	// 			label: 'Branches',
-	// 		},
-	// 	],
-	// },
+	
 ];

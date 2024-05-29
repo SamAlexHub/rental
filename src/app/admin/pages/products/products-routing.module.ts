@@ -5,6 +5,7 @@ import { ProductCategoryComponent } from './product-category/product-category.co
 import { ProductRentComponent } from './product-rent/product-rent.component';
 import { ProductsOutletComponent } from './products-outlet.component';
 import { BookingsComponent } from './bookings/booking.component';
+import { CustomerComponent } from './customer/customer';
 
 const routes: Routes = [
 	{
@@ -34,6 +35,11 @@ const routes: Routes = [
 				path: 'bookings',
 				component: BookingsComponent, 
 				 data: { pageTitle: 'Bookings' } 
+			},
+			{
+				path: 'customer',
+				component: CustomerComponent, 
+				 data: { pageTitle: 'Customer' } 
 			}
 
 ],

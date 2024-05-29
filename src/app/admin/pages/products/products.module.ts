@@ -15,11 +15,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { InventoryDialogComponent } from './dialogs/inventory-dialogue/inventory.dialogue';
+import { CustomerComponent } from './customer/customer';
+import { CustomerDialogComponent } from './dialogs/customer-dialogue/customer.dialogue';
 
 
 @NgModule({
 	providers:[DatePipe],
-	declarations: [ProductCategoryComponent, ProductRentComponent,ProductsOutletComponent, CategoryDialogComponent,BookingsComponent,BookingDialogComponent,InventoryDialogComponent],
+	declarations: [ProductCategoryComponent, ProductRentComponent,ProductsOutletComponent, CategoryDialogComponent,BookingsComponent,BookingDialogComponent,InventoryDialogComponent,CustomerComponent,CustomerDialogComponent],
 	imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, ProductsRoutingModule,MatDatepickerModule,MatInputModule,MatNativeDateModule,FormsModule],
 })
 export class ProductsModule {}

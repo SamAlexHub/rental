@@ -20,10 +20,7 @@ const routes: Routes = [
 				path: 'products',
 				loadChildren: async () => await import('./pages/products/products.module').then((m) => m.ProductsModule),
 			},
-			{
-				path: 'administration',
-				loadChildren: async () => await import('./pages/administration/administration.module').then((m) => m.AdministrationModule),
-			},
+
 		],
 	},
 ];
