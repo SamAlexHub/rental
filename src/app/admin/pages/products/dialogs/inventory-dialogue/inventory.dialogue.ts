@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 
@@ -32,10 +32,11 @@ export class InventoryDialogComponent implements OnInit {
         this.mode = this.data.mode;
         this.form = this.fb.group({
             category: new FormControl(),
-            name: new FormControl(),
-            serial_no: new FormControl(),
-            inventory_stock: new FormControl(),
-            rentperday: new FormControl()
+            name: new FormControl('',Validators.required),
+            serial_no: new FormControl('',Validators.required),
+            inventory_stock: new FormControl('',Validators.required),
+            rentperday: new FormControl('',Validators.required),
+            accessories: this.fb.array([])
         });
         // this.cId = this.data.values._id;
         if (this.mode === 'edit') {
@@ -46,13 +47,16 @@ export class InventoryDialogComponent implements OnInit {
                 inventory_stock:this.data.values.inventory_stock,
                 rentperday:this.data.values.rentperday
         	});
+            this.setItems(this.data.values.accessories);
         }
 
         this.getCategoryList();
     }
 
+    
+
     onSubmitForm(): void {
-        if (this.form.invalid) return;
+        if (this.form.invalid) return;        
         this.dialogRef.close(Object.assign({}, this.emitEvents, { data: this.form.value, event: 'confirm', mode: this.mode, id: this.cId }));
     }
 
@@ -72,6 +76,31 @@ export class InventoryDialogComponent implements OnInit {
             this.productList = res.product;
         });
     }
+
+    get accessories() {
+		return this.form.get('accessories') as FormArray;
+	}
+
+	addItem() {
+		this.accessories.push(this.fb.group({
+			name: ['', Validators.required],
+			quantity: ['', Validators.required]
+		}));
+	}
+
+	removeItem(index: number) {
+		this.accessories.removeAt(index);        
+	}
+
+	setItems(items: any[]) {
+		const itemsFormArray = this.form.get('accessories') as FormArray;
+		items.forEach(item => {
+			itemsFormArray.push(this.fb.group({
+				name: item.name,
+				quantity: item.quantity
+			}));
+		});
+	}
 
     
 }

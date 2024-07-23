@@ -8,6 +8,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { InventoryService } from "src/app/services/inventory/inventory.service";
 import { InventoryDialogComponent } from "../dialogs/inventory-dialogue/inventory.dialogue";
 import { ConfirmComponent } from "src/app/shared/components/dialogs/confirm/confirm.component";
+import { ActivatedRoute } from "@angular/router";
+import { CategoryService } from "src/app/services/category/category.service";
 
 export interface PeriodicElement {
   name: string;
@@ -26,13 +28,37 @@ export class ProductRentComponent implements OnInit {
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  idFromParams: any;
+  pageTitle: string = '';
 
   productList: any[] = [];
+  categoryList: any;
 
-  constructor(private dialog: MatDialog, private invService: InventoryService) { }
+  constructor(private dialog: MatDialog, private invService: InventoryService, private active: ActivatedRoute, private cat: CategoryService) { }
 
   ngOnInit(): void {
-    this.listProducts();
+    this.active.params.subscribe((p: any) => {
+      this.idFromParams = p.id
+      this.listCatById();
+    });
+    // this.listProducts();
+  }
+
+  listCatById() {
+    this.cat.listCategoriesById(this.idFromParams).subscribe((res: any) => {
+      this.categoryList = res.category;
+      this.pageTitle = this.categoryList.name;
+      this.listItemByCatId();
+    }, (err) => {
+      console.log('Api Error');
+    })
+  }
+
+  listItemByCatId() {
+    this.cat.listprodcutByCatId(this.idFromParams).subscribe((item: any) => {
+      console.log(item);
+     this.dataSource = item.product;
+    })
   }
 
   listProducts() {
@@ -43,7 +69,7 @@ export class ProductRentComponent implements OnInit {
 
   onOpenInventoryDialog(mode: string, values?: any, id?: String) {
     const dialogRef = this.dialog.open(InventoryDialogComponent, {
-      width: '600px',
+      width: '1000px',
       disableClose: true,
       data: { values, mode },
     });

@@ -40,7 +40,7 @@ export class BookingService {
 
   getProductByCategory(id: String) {
 
-    const url = this.productUrl + '/getItembycategoryId';
+    const url = this.productUrl + '/listprodcutByCatId';
 
     const headers = new HttpHeaders({
       "contentType": 'application/json'

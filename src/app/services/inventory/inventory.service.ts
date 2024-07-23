@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 export class InventoryService {
 
   url = environment.endpoint + '/v1/product';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -42,4 +43,8 @@ export class InventoryService {
     });
     return this.http.delete(url, { headers });
   }
+
+  
+
+  
 }

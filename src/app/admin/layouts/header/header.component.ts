@@ -15,9 +15,9 @@ export class HeaderComponent implements OnInit {
 	isToggle: boolean = false;
 	isThemeMode: boolean = false;
 
-	constructor(private router: Router, @Inject(DOCUMENT) private document: Document, private randerer: Renderer2, private authService: AuthService) {}
+	constructor(private router: Router, @Inject(DOCUMENT) private document: Document, private randerer: Renderer2, private authService: AuthService) { }
 
-	ngOnInit(): void {}
+	ngOnInit(): void { }
 
 	onToggleCollapse() {
 		this.isToggle = !this.isToggle;
@@ -25,7 +25,8 @@ export class HeaderComponent implements OnInit {
 	}
 
 	onLogout(): void {
-		this.authService.logout();
+		localStorage.removeItem('token');
+		this.router.navigate(['/login']);
 	}
 
 	onChangeThemeMode(event: boolean) {

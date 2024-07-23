@@ -34,6 +34,7 @@
                             "src/assets"
                         ],
                         "styles": [
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/styles.scss",
                             {
                                 "input": "src/themes/dark-theme.scss",
@@ -86,11 +87,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "Mayoora-Ui:build:production"
-                            // "proxyConfig": "./proxy.conf.json"
                         },
                         "development": {
                             "browserTarget": "Mayoora-Ui:build:development"
-                            // "proxyConfig": "./proxy.conf.json"
                         }
                     },
                     "defaultConfiguration": "development"

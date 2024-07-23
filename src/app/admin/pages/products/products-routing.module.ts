@@ -23,9 +23,9 @@ const routes: Routes = [
 				data: {
 					pageTitle: 'Product Category',
 				},
-			},
+			},	
 			{
-				path: 'inventory',
+				path: 'inventory/:id',
 				component: ProductRentComponent,
 				data: {
 					pageTitle: 'Inventory',

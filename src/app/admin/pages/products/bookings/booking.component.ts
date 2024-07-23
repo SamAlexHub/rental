@@ -34,6 +34,7 @@ export class BookingsComponent implements OnInit {
 
     ngOnInit(): void {
         this.listBookings();
+       
     }
 
     listBookings() {
@@ -44,7 +45,7 @@ export class BookingsComponent implements OnInit {
 
     onOpenBookingDialog(mode: string, values?: any, id?: String) {
         const dialogRef = this.dialog.open(BookingDialogComponent, {
-            width: '600px',
+            width: '1000px',
             disableClose: true,
             data: { values, mode },
         });

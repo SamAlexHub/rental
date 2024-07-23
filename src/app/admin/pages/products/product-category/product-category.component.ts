@@ -38,7 +38,7 @@ export class ProductCategoryComponent implements OnInit, AfterViewInit {
 
 	onOpenCateogryDialog(mode: string, values?: any): void {
 		const dialogRef = this.dialog.open(CategoryDialogComponent, {
-			width: '600px',
+			width: '1000px',
 			disableClose: true,
 			data: { values, mode },
 		});

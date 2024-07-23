@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DatePipe } from '@angular/common';
 
@@ -19,6 +19,7 @@ export interface DialogData {
 })
 export class BookingDialogComponent implements OnInit {
 	form!: FormGroup;
+	profileForm!: FormGroup;
 	mode: 'create' | 'edit' = 'create';
 	emitEvents: any = { data: null, event: 'cancel' };
 	cId: String = '';
@@ -27,17 +28,19 @@ export class BookingDialogComponent implements OnInit {
 	customerList: any[] = [];
 	selectedCategoryId: String | undefined;
 
-	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<BookingDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private categoryService: CategoryService, private bookingService: BookingService, private datePipe: DatePipe, private customerService: CustomerService) { }
+	constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<BookingDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private categoryService: CategoryService, private bookingService: BookingService, private datePipe: DatePipe, private customerService: CustomerService, private formBuilder: FormBuilder) { }
 
 	ngOnInit(): void {
 		this.mode = this.data.mode;
-		this.form = this.fb.group({
+		this.form = this.formBuilder.group({
 			category: new FormControl(),
 			product: new FormControl(),
 			booking_date: new FormControl(),
 			return_date: new FormControl(),
-			customer: new FormControl()
+			customer: new FormControl(),
+			// aliases: this.formBuilder.array([]),
 		});
+
 		if (this.mode === 'edit') {
 			if (this.data.values?.product?.category) { this.getProductByCategory(this.data.values?.product?.category) }
 			this.form.patchValue({
@@ -53,6 +56,8 @@ export class BookingDialogComponent implements OnInit {
 	}
 
 	onSubmitForm(): void {
+		console.log('values', this.form.value);
+
 		if (this.form.invalid) return;
 		this.selectedCategoryId = this.form.value.category;
 		let form = {
@@ -94,4 +99,5 @@ export class BookingDialogComponent implements OnInit {
 			if (res.data) { this.customerList = res.data }
 		});
 	}
+	
 }
