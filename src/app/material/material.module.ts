@@ -31,7 +31,6 @@ const Materials = [
 	MatSortModule,
 	MatDialogModule,
 	MatCardModule,
-	MatRippleModule,
 	MatSnackBarModule,
 ];
 

@@ -8,11 +8,10 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ConfirmComponent } from './components/dialogs/confirm/confirm.component';
 import { PageHeaderComponent } from './components/page-header/page-header.component';
 import { TableResponsiveDirective } from './directives/table-responsive.directive';
-import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
 	declarations: [SidenavComponent, SublevelMenuComponent, ConfirmComponent, PageHeaderComponent, TableResponsiveDirective],
-	imports: [CommonModule, RouterModule, MaterialModule,MatSelectModule],
+	imports: [CommonModule, RouterModule, MaterialModule],
 	exports: [SidenavComponent, SublevelMenuComponent, ConfirmComponent, PageHeaderComponent, TableResponsiveDirective],
 })
 export class SharedModule {}
