@@ -1,59 +1,83 @@
 <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
     <h2 mat-dialog-title>{{mode === 'create' ? 'Create New Booking' : 'Edit Booking'}}</h2>
     <mat-dialog-content class="mat-typography">
-        <mat-form-field appearance="outline">
-            <mat-label>Select Category</mat-label>
-            <select matNativeControl formControlName="category" required (change)="onCategoryChange($event)">
-                <option *ngFor="let category of categoryList" [value]="category._id">{{category?.name}}</option>
-            </select>
-            <mat-error *ngIf="form.controls['category']?.hasError('required')">
-                Category name is required.
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Select Product</mat-label>
-            <select matNativeControl formControlName="product" required>
-                <option *ngFor="let product of productList" [value]="product?._id">{{product?.name}}</option>
-            </select>
-            <mat-error *ngIf="form.controls['product']?.hasError('required')">
-                Product name is required.
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Select Booking Date</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="booking_date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="form.controls['booking_date']?.hasError('required')">
-                Category name is required.
-            </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Select Return Date</mat-label>
-            <input matInput [matDatepicker]="picker2" formControlName="return_date">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-            <mat-error *ngIf="form.controls['return_date']?.hasError('required')">
-                Category name is required.
-            </mat-error>
-        </mat-form-field>
-        
-        <mat-form-field appearance="outline">
-            <mat-label>Select Customer</mat-label>
-            <select matNativeControl formControlName="customer" required>
-                <option *ngFor="let customer of customerList" [value]="customer._id">{{customer?.name}}</option>
-            </select>
-            <mat-error *ngIf="form.controls['customer']?.hasError('required')">
-                Category name is required.
-            </mat-error>
-        </mat-form-field>
+        <div class="row">
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Category</mat-label>
+                    <select matNativeControl formControlName="category" required (change)="onCategoryChange($event)">
+                        <option *ngFor="let category of categoryList" [value]="category._id">{{category?.name}}</option>
+                    </select>
+                    <mat-error *ngIf="form.controls['category']?.hasError('required')">
+                        Category name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Product</mat-label>
+                    <select matNativeControl formControlName="product" required (change)="onProductChange($event)">
+                        <option *ngFor="let product of productList" [value]="product?._id">{{product?.name}}</option>
+                    </select>
+                    <mat-error *ngIf="form.controls['product']?.hasError('required')">
+                        Product name is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-12" style="border: 1px solid black;" *ngIf="showAdditionalFields">
+                    <h3 class="acc">Add Accessories </h3>
+                    <div class="accessories-container" formArrayName="productAccessories" *ngIf="showAdditionalFields">
+                        <div *ngFor="let accessory of productAccessories.controls; let i=index" [formGroupName]="i"
+                            class="accessory-container">
+                            <mat-checkbox formControlName="selected">{{ accessory.get('name')?.value }}</mat-checkbox>
+                            <mat-form-field appearance="outline">
+                                <input matInput formControlName="quantity" placeholder="Quantity" type="number" min="0">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                <div class="button-acc">
+                    <button type="button" mat-raised-button (click)="addToCart()">Add items</button>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Booking Date</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="booking_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="form.controls['booking_date']?.hasError('required')">
+                        Select booking date
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Return Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="return_date">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error *ngIf="form.controls['return_date']?.hasError('required')">
+                        Select return date
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Customer</mat-label>
+                    <select matNativeControl formControlName="customer" required>
+                        <option *ngFor="let customer of customerList" [value]="customer._id">{{customer?.name}}</option>
+                    </select>
+                    <mat-error *ngIf="form.controls['customer']?.hasError('required')">
+                        Select customer
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <button type="button" color="warn" mat-button [mat-dialog-close]="emitEvents">Cancel</button>
-        <button [disabled]="!form.valid" type="submit" mat-button>
+        <button  type="submit" mat-button>
             {{mode === 'create' ? 'Create' : 'Update'}}
         </button>
     </mat-dialog-actions>

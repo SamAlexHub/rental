@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 const Materials = [
 	FlexLayoutModule,
 	MatFormFieldModule,
@@ -32,6 +32,8 @@ const Materials = [
 	MatDialogModule,
 	MatCardModule,
 	MatSnackBarModule,
+	MatCheckboxModule
+	
 ];
 
 @NgModule({

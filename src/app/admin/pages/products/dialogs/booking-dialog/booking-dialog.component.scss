@@ -1,0 +1,38 @@
+.accessories-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px; /* Adjust the gap between items as needed */
+}
+
+.accessory-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adjust the gap between checkbox and input as needed */
+}
+
+.acc {
+    text-align: center;
+    font-size: 19px;
+    margin-top: 9px;
+    background: aquamarine;
+    color: black;
+}
+
+.accessory-container mat-checkbox {
+    margin-top: -18px;
+    margin-right: 16px;
+}
+
+.button-acc {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.button-acc button {
+    background-color: aquamarine;
+}

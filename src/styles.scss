@@ -35,3 +35,21 @@ body {
 	margin: 0;
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.accessory-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.accessory-container mat-checkbox {
+    margin-right: 16px;
+}
+
+.accessory-quantity {
+    flex: 1;
+}
+
+.button-acc {
+	display: flex;
+}
